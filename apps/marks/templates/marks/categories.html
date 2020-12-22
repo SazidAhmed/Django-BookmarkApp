@@ -1,0 +1,117 @@
+
+{% extends 'adminpanel/base.html'%}
+{% block content %}
+<div id="delete-category">
+    <!-- Hero -->
+    <div class="bg-body-light">
+        <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h3 my-2">
+                    Category List<small class="font-size-base font-w400 text-muted">
+                    <a href="{% url 'category_add' %}" class="badge badge-pill badge-success"><i class="fa fa-fw fa-plus-circle"></i> New</a>
+                    </small>
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="{% url 'dashboard' %}">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">Category</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- END Hero -->
+    <div class="content">
+        <div class="row row-deck">
+        {% for category in categories %}
+        <div class="col-sm-6 col-md-4 col-l-3 col-xl-3">
+            <!-- Pending Orders -->
+            <div class="block block-rounded d-flex flex-column">
+                <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                        <dt class="font-size-h2 font-w700">{{ category.title }}</dt>
+                        <dd class="text-muted mb-0">Bookmark{{ category.bookmarks.all|length|pluralize:"s"}} : {{ category.bookmarks.all|length }}</dd>
+                    </dl>
+                    <div class="item item-rounded bg-body"><a href="{% url 'category' category.id %}" class="card-footer-item">
+                        <i class="fa fa-eye font-size-h3 text-success"></i></a>
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500 align-items-center text-primary btn btn-link" href="{% url 'category_edit' category.id %}">
+                        Edit
+                        <i class="fa fa-edit ml-1 opacity-50 font-size-base text-primary"></i>
+                    </a>
+                        <a class="font-w500 align-items-center text-danger btn btn-link "  @click="toggleDialog({{category.id}})">
+                        Delete
+                        <i class="fa fa-trash-alt ml-1 opacity-50 font-size-base text-danger"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- END Pending Orders -->
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="modal" v-bind:class={'is-active':showDialog} id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modal-block-small" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+              <div class="block block-rounded block-themed block-transparent mb-0">
+                  <div class="block-header bg-primary-dark">
+                      <h3 class="block-title">Warning!!!</h3>
+                      <div class="block-options">
+                          <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close" @click.prevent="showDialog =!showDialog">
+                              <i class="fa fa-fw fa-times"></i>
+                          </button>
+                      </div>
+                  </div>
+                  <div class="block-content font-size-sm">
+                      <h4>Are You Sure?</h4>
+                      <p>All Bookmarks of this category will be also deleted.</p>
+                  </div>
+                  <div class="block-content block-content-full text-right border-top">
+                      <button type="button" class="btn btn-alt-danger mr-1" data-dismiss="modal"  @click.prevent="showDialog =!showDialog">No, Cancel</button>
+                      <button type="button" class="btn btn-alt-success" @click.prevent="deleteCategory()">Yes, Delete</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+ 
+{% block scripts %}
+  <script>
+    var app = new Vue({
+        el: '#delete-category',
+        delimiters: ['[[', ']]'],
+        data() {
+            return{
+                message: 'Vue JS!',
+                showDialog:false,
+                category_id:0
+            }
+        },
+        methods:{
+            toggleDialog(id){
+                this.category_id = id
+                console.log(id)
+                this.showDialog = true
+                $("#deleteModal").modal("show");
+            },
+            deleteCategory(){
+                axios.post('/adminpanel/api/delete_category/'+this.category_id+'/')
+                    .then((response)=>{
+                        $("#deleteModal").modal("hide");
+                        window.location.href='/adminpanel/categories/'
+                    })
+                    .catch((error)=>{
+                        console.log(error)
+                    })
+            },
+        }
+    });
+  </script>
+{% endblock %}

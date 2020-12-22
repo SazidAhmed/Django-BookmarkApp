@@ -1,0 +1,140 @@
+
+{% extends 'adminpanel/base.html'%}
+{% block content %}
+<div id="delete-bookmark">
+  <!-- Hero -->
+  <div class="bg-body-light">
+      <div class="content content-full">
+          <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+              <h1 class="flex-sm-fill h3 my-2">
+                 {{ category.title }}<small class="font-size-base font-w400 text-muted">
+                
+                <a href="{% url 'bookmark_add' category.id %}" class="badge badge-pill badge-success"><i class="fa fa-fw fa-plus-circle"></i> New</a>
+                 </small>
+                 
+              </h1>
+              <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                  <ol class="breadcrumb breadcrumb-alt">
+                      <li class="breadcrumb-item" aria-current="page">
+                          <a class="link-fx" href="{% url 'dashboard' %}">Dashboard</a>
+                      </li>
+                       <li class="breadcrumb-item" aria-current="page">
+                          <a class="link-fx" href="{% url 'categories' %}">Category</a>
+                      </li>
+                      <li class="breadcrumb-item"> {{ category.title }}</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+  <!-- END Hero -->
+  {% include 'website/alerts.html' %}
+  <div class="content">
+    <div class="row row-deck">
+      <div class="col-sm-6 col-md-4 col-l-3 col-xl-3" v-for="bookmark in bookmarks" v-bind:key="bookmark.id">
+          <!-- Pending Orders -->
+          <div class="block block-rounded d-flex flex-column">
+              <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                  <dl class="mb-0">
+                    <dt class="font-size-h2 font-w700">[[ bookmark.title ]]</dt>
+                    <dd class="text-muted mb-0 ">Visits: <span class="badge badge-pill badge-warning">[[ bookmark.visits]]</span></dd>
+                    <dd class="text-muted mb-0">[[ bookmark.description ]]</dd>
+                  </dl>
+                  <div class="item item-rounded bg-body"><a :href="bookmark.url"  @click="increaseVisits(bookmark.id)" class="card-footer-item" target="_blank">
+                      <i class="fa fa-eye font-size-h3 text-success"></i></a>
+                  </div>
+              </div>
+              <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                  <a class="font-w500 align-items-center text-primary btn btn-link" :href="bookmark.editurl">
+                      Edit
+                      <i class="fa fa-edit ml-1 opacity-50 font-size-base text-primary"></i>
+                  </a>
+                    <a class="font-w500 align-items-center text-danger btn btn-link "  @click="toggleDialog(bookmark.id)">
+                      Delete
+                      <i class="fa fa-trash-alt ml-1 opacity-50 font-size-base text-danger"></i>
+                  </a>
+              </div>
+          </div>
+          <!-- END Pending Orders -->
+      </div>
+    </div>
+  </div>
+    <div class="modal" v-bind:class={'is-active':showDialog} id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modal-block-small" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+              <div class="block block-rounded block-themed block-transparent mb-0">
+                  <div class="block-header bg-primary-dark">
+                      <h3 class="block-title">Warning!!!</h3>
+                      <div class="block-options">
+                          <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close" @click.prevent="showDialog =!showDialog">
+                              <i class="fa fa-fw fa-times"></i>
+                          </button>
+                      </div>
+                  </div>
+                  <div class="block-content font-size-sm">
+                      <h4>Are You Sure?</h4>
+                      <p>This Bookmark Will Be Deleted.</p>
+                  </div>
+                  <div class="block-content block-content-full text-right border-top">
+                      <button type="button" class="btn btn-alt-danger mr-1" data-dismiss="modal"  @click.prevent="showDialog =!showDialog">No, Cancel</button>
+                      <button type="button" class="btn btn-alt-success" @click.prevent="deleteBookmark()">Yes, Delete</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    var app = new Vue({
+        el: '#delete-bookmark',
+        delimiters: ['[[', ']]'],
+        data() {
+            return{
+                message: 'Vue JS!',
+                showDialog:false,
+                bookmark_id:0,
+                bookmarks:[ {{ bookmarksstring|safe }} ]
+            }
+        },
+        mounted(){
+            console.log(this.bookmarks)
+        },
+        methods:{
+            toggleDialog(id){
+                this.bookmark_id = id
+                this.showDialog = true
+                $("#deleteModal").modal("show");
+            },
+            deleteBookmark(){
+                axios.post('/adminpanel/api/delete_bookmark/'+this.bookmark_id+'/')
+                    .then((response)=>{
+                        $("#deleteModal").modal("hide");
+                        this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== this.bookmark_id)
+                        
+                    })
+                    .catch((error)=>{
+                        console.log(error)
+                    })
+            },
+            increaseVisits(id){
+                axios.post('/adminpanel/api/increase_visits/'+id+'/')
+                    .then((response)=>{
+                        for (let i=0; i < this.bookmarks.length; i++){
+                            if (this.bookmarks[i].id === id){
+                                this.bookmarks[i].visits = parseInt(this.bookmarks[i].visits) + 1
+                            }
+                        }
+                    })
+                    .catch((error)=>{
+                        console.log(error)
+                    })
+            },
+        }
+    });
+  </script>
+{% endblock %}

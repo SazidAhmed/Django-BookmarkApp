@@ -1,0 +1,14 @@
+{% include 'website/header.html' %}
+
+{% include 'website/topnav.html' %}
+
+<!-- Main Container -->
+<main id="main-container">
+  {% block content %}
+  {% endblock %}
+</main>
+ 
+<!-- END Main Container -->
+{% include 'website/footer.html' %}
+{% block scripts %}
+{% endblock %}

@@ -1,0 +1,74 @@
+
+{% extends 'adminpanel/base.html'%}
+{% block content %}
+<div id="delete-bookmark">
+  <!-- Hero -->
+  <div class="bg-body-light">
+      <div class="content content-full">
+          <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+              <h1 class="flex-sm-fill h3 my-2">
+                 {{ category.title }} <small class="font-size-base font-w400 text-muted">
+                
+                <a href="{% url 'bookmark_add' category.id %}" class="badge badge-pill badge-success"><i class="fa fa-fw fa-plus-circle"></i> Add Bookmark</a>
+                 </small>
+                 
+              </h1>
+              <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                  <ol class="breadcrumb breadcrumb-alt">
+                      <li class="breadcrumb-item" aria-current="page">
+                          <a class="link-fx" href="{% url 'dashboard' %}">Dashboard</a>
+                      </li>
+                       <li class="breadcrumb-item" aria-current="page">
+                          <a class="link-fx" href="{% url 'categories' %}">Category</a>
+                      </li>
+                      <li class="breadcrumb-item"> {{ category.title }}</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+  {% include 'website/alerts.html' %}
+  <div class="content">
+    <div class="row row-deck">
+      {% for bookmark in category.bookmarks.all %}
+      <div class="col-sm-6 col-xl-3">
+          <!-- Pending Orders -->
+          <div class="block block-rounded d-flex flex-column">
+              <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                  <dl class="mb-0">
+                      <dt class="font-size-h2 font-w700">{{ bookmark.title }}</dt>
+                      <dd class="text-muted mb-0">{{ bookmark.description }}</dd>
+                  </dl>
+                  <div class="item item-rounded bg-body"><a href="{{ bookmark.url }}" class="card-footer-item">
+                      <i class="fa fa-eye font-size-h3 text-success"></i></a>
+                  </div>
+              </div>
+              <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                  <a class="font-w500 align-items-center text-primary" href="{% url 'bookmark_edit' category.id bookmark.id %}">
+                      Edit
+                      <i class="fa fa-edit ml-1 opacity-50 font-size-base text-primary"></i>
+                  </a>
+                    <a class="font-w500 align-items-center text-danger" href="{% url 'bookmark_delete' category.id bookmark.id %}">
+                      Delete
+                      <i class="fa fa-trash-alt ml-1 opacity-50 font-size-base text-danger"></i>
+                  </a>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+ 
+{% block scripts %}
+  <script>
+    var app = new Vue({
+        el: '#delete-bookmark',
+        delimiters: ['[[', ']]'],
+        data: {
+            message: 'Hello Sazid!',
+        }
+    });
+  </script>
+{% endblock %}

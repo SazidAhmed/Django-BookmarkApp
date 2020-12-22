@@ -1,0 +1,44 @@
+{% extends 'adminpanel/base.html'%}
+{% block content %}
+  <!-- Hero -->
+  <div class="bg-body-light">
+      <div class="content content-full">
+          <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+              <h1 class="flex-sm-fill h3 my-2">
+                 Complete <small class="font-size-base font-w400 text-muted">
+                 <a href="#"></a>
+                 </small>
+              </h1>
+              <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                  <ol class="breadcrumb breadcrumb-alt">
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a class="link-fx" href="{% url 'dashboard' %}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">Settings</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+  {% include 'website/alerts.html' %}
+    <!-- Page Content -->
+    <div class="content" id="plans">
+      <div class="block block-rounded">
+        <div class="block-content block-content-full">
+            <div class="row">
+                <div class="col-lg-12 ">
+                  <div class="alert alert-success d-flex align-items-center" role="alert">
+                      <div class="flex-00-auto">
+                          <i class="fa fa-fw fa-check"></i>
+                      </div>
+                      <div class="flex-fill ml-3">
+                          <p class="mb-0">Plan Has Been Upgraded Successfully.</p>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- END Page Content -->
+{% endblock %}
