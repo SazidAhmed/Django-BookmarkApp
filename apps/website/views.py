@@ -12,5 +12,5 @@ def about(request):
 def contact(request):
   return render(request, 'contact.html')
 
-def plans(request):
-  return render(request, 'plans.html')
+def plan(request):
+  return render(request, 'plan.html')
