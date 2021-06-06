@@ -1,0 +1,323 @@
+{% extends 'website/base.html'%}
+{% block content %}
+
+<!-- Herp -->
+<div id="one-vue-edition" class="bg-light">
+    <div class="content content-full">
+        <div class="row py-5">
+            <div class="order-md-1 col-md-5 d-flex align-items-center justify-content-center py-5">
+                <svg class="w-50" viewBox="0 0 261.76 226.69" xmlns="http://www.w3.org/2000/svg"><g transform="matrix(1.3333 0 0 -1.3333 -76.311 313.34)"><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-75.491l98.16-170.02 98.16 170.02z" fill="#41b883"/></g><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-36.227l58.896-102.01 58.896 102.01z" fill="#34495e"/></g></g></svg>
+            </div>
+            <div class="order-md-0 col-md-7 d-flex align-items-center">
+                <div>
+                    <h2 class="h1 font-w700 mb-2">
+                        Techminate <span class="font-w400">Bookmarkz</span>
+                    </h2>
+                    <p class="font-size-lg font-w500 text-muted mb-4">
+                        Easiest & Categorized Way To Manage Bookmark
+                    </p>
+                    {% if request.user.is_authenticated %}
+                    <a class="btn btn-success px-4 py-2 text-uppercase font-size-sm" href="{% url 'dashboard' %}">
+                        Dashboard
+                        <i class="fa fa-fw fa-arrow-right font-size-base opacity-50 ml-1"></i>
+                    </a>
+                    {% else %}
+                    <a class="btn btn-success px-4 py-2 text-uppercase font-size-sm" href="{% url 'register' %}">
+                        Check it out
+                        <i class="fa fa-fw fa-arrow-right font-size-base opacity-80 ml-1"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Hero -->
+
+<!-- Features -->
+<div id="one-versions" class="bg-white">
+    <div class="content content-full">
+        <div class="py-5">
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <h2 class="h1 font-w700 mb-2">
+                        App<span class="font-w400"> Features</span>
+                    </h2>
+                    <p class="font-size-lg font-w500 text-muted mb-0">
+                        We provide the best service to organize your bookmarks with all of these features
+                    </p>
+                </div>
+                <div class="col-md-6 d-none d-md-flex align-items-md-center justify-content-md-end">
+                    <p class="h1 font-w700 text-body-bg-dark mb-0">
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-xl-3 py-3">
+                    <div class="item item-rounded bg-amethyst-lighter my-4">
+                        <i class="fa fa-2x fa-fire text-amethyst"></i>
+                    </div>
+                    <h4 class="mb-2">Dynamic Entry</h4>
+                    <p class="text-muted">
+                       We let you to store dynamic data, links and description. Not only that you can also manipulate them when ever you want.
+                    </p>
+                </div>
+                <div class="col-sm-6 col-xl-3 py-3">
+                    <div class="item item-rounded bg-default-lighter my-4">
+                        <i class="fa fa-2x fa-boxes text-default"></i>
+                    </div>
+                    <h4 class="mb-2">Dynamic Routing</h4>
+                    <p class="text-muted">
+                        We let you create your boorkmark with dynamic routing system so that whenever you click on a bookmark it will open in a new window.
+                    </p>
+                </div>
+                <div class="col-sm-6 col-xl-3 py-3">
+                    <div class="item item-rounded bg-modern-lighter my-4">
+                        <i class="fab fa-2x fa-chrome text-modern"></i>
+                    </div>
+                    <h4 class="mb-2">Browser Sync</h4>
+                    <p class="text-muted">
+                        It will serve and sync your bookmark across different browsers and also refresh them each time your save your files.
+                    </p>
+                </div>
+                <div class="col-sm-6 col-xl-3 py-3">
+                    <div class="item item-rounded bg-modern-lighter my-4">
+                        <i class="fa fa-2x fa-star text-warning"></i>
+                    </div>
+                    <h4 class="mb-2">Free Update</h4>
+                    <p class="text-muted">
+                        We love our customers, so we are giving the Remastered version away as a free update to all existing ones! Thank you all for your support!
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Features -->
+
+<!-- Call To Action -->
+<div id="one-call-to-action" class="bg-light">
+    <div class="content content-full">
+        <div class="py-5 py-md-8 text-center">
+            <h2 class="font-w700 mb-2">
+                Want to take a look ?
+            </h2>
+            <p class="font-size-lg font-w500 text-muted mb-4">
+                Open a free account and start your journey.
+            </p>
+            <a class="btn btn-success px-4 py-2 text-uppercase font-size-sm" href="{% url 'register' %}">
+                Get Started
+                <i class="fa fa-fw fa-arrow-right font-size-base opacity-80 ml-1"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- END Call To Action -->
+<!-- faq -->
+<div  id="one-versions" class="bg-white">
+    <div class="content content-full">
+        <div class="py-5">
+            <h2 class="h1 font-w700 mb-5">
+                FAQs <span class="font-w400">Frequently Asked Questions</span>
+            </h2>
+            <div id="faq1" class="mb-5" role="tablist" aria-multiselectable="true">
+                <div class="block block-rounded block-bordered mb-1">
+                    <div class="block-header block-header-default" role="tab" id="faq1_h1">
+                        <a class="text-muted" data-toggle="collapse" data-parent="#faq1" href="#faq1_q1" aria-expanded="true" aria-controls="faq1_q1">How to create a new bookmark in this app ?</a>
+                    </div>
+                    <div id="faq1_q1" class="collapse show" role="tabpanel" aria-labelledby="faq1_h1" data-parent="#faq1">
+                        <div class="block-content">
+                            <p>Its easy to do with these following steps :</p>
+                            <p>
+                                1. Create a category if you haven't created yet,</br>
+                                2. Open the category and click on add new bookmark,</br>
+                                3. Fill the form with title, link and description,</br>
+                                4. Click on save.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="block block-rounded block-bordered mb-1">
+                    <div class="block-header block-header-default" role="tab" id="faq1_h2">
+                        <a class="text-muted" data-toggle="collapse" data-parent="#faq1" href="#faq1_q2" aria-expanded="true" aria-controls="faq1_q2">Why shall I use this app instead of browser bookmark ?</a>
+                    </div>
+                    <div id="faq1_q2" class="collapse" role="tabpanel" aria-labelledby="faq1_h2" data-parent="#faq1">
+                        <div class="block-content">
+                            <p>We provide customizable, maintainable and categorized data entry feature that a browser usually doesn't provide.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="block block-rounded block-bordered mb-1">
+                    <div class="block-header block-header-default" role="tab" id="faq1_h2">
+                        <a class="text-muted" data-toggle="collapse" data-parent="#faq1" href="#faq1_q3" aria-expanded="true" aria-controls="faq1_q3">Do I need to pay to use this app ?</a>
+                    </div>
+                    <div id="faq1_q3" class="collapse" role="tabpanel" aria-labelledby="faq1_h3" data-parent="#faq1">
+                        <div class="block-content">
+                            <p>No, You can use our free plan and store your bookmarks untill you reach the limit of free plan.</br>
+                                If you can upgrage the plan any time you want from our plan list.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="block block-rounded block-bordered mb-1">
+                    <div class="block-header block-header-default" role="tab" id="faq1_h2">
+                        <a class="text-muted" data-toggle="collapse" data-parent="#faq1" href="#faq1_q4" aria-expanded="true" aria-controls="faq1_q4">How to contact for customer service ?</a>
+                    </div>
+                    <div id="faq1_q4" class="collapse" role="tabpanel" aria-labelledby="faq1_h4" data-parent="#faq1">
+                        <div class="block-content">
+                            <p>You, can join our discord server or send email :</br>
+                                1. Discord : https://discord.gg/ku9hrsXBQh</br>
+                                2. Email : techminate@gmail.com 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- plan -->
+<div id="one-versions" class="bg-light">
+    <div class="content content-full">
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <h2 class="h1 font-w700 mb-2">
+                    Plans<span class="font-w400"> & Packages</span>
+                </h2>
+                <p class="font-size-lg font-w500 text-muted mb-0">
+                    We provide upgradable plans and packages.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xl-3 js-appear-enabled animated fadeInUp" data-toggle="appear" data-offset="50" data-class="animated fadeInUp">
+                <!-- Developer Plan -->
+                <a class="block block-rounded block-link-shadow text-center" href="">
+                    <div class="block-header">
+                        <h3 class="block-title">Free</h3>
+                    </div>
+                    <div class="block-content bg-body-light">
+                        <div class="py-2">
+                            <p class="h1 font-w700 mb-2">$0</p>
+                            <p class="h6 text-muted">per month</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <div class="font-size-sm py-2">
+                            <p>
+                                <strong>3</strong> Categories
+                            </p>
+                            <p>
+                                <strong>10</strong> Bookmarks
+                            </p>
+                            <p>
+                                <strong>Yes</strong> Customer Support
+                            </p>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full bg-body-light">
+                        <span class="btn btn-success px-4" >Try now</span>
+                    </div>
+                </a>
+                <!-- END Developer Plan -->
+            </div>
+            <div class="col-md-6 col-xl-3 js-appear-enabled animated fadeInUp" data-toggle="appear" data-offset="50" data-timeout="200" data-class="animated fadeInUp">
+                <!-- Startup Plan -->
+                <a class="block block-rounded block-link-shadow text-center" href="">
+                    <div class="block-header">
+                        <h3 class="block-title">Pro</h3>
+                    </div>
+                    <div class="block-content bg-body-light">
+                        <div class="py-2">
+                            <p class="h1 font-w700 mb-2">$5</p>
+                            <p class="h6 text-muted">per month</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <div class="font-size-sm py-2">
+                            <p>
+                                <strong>10</strong> Categories
+                            </p>
+                            <p>
+                                <strong>50</strong> Bookmarks
+                            </p>
+                            <p>
+                                <strong>Yes</strong> Customer Support
+                            </p>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full bg-body-light">
+                        <span class="btn btn-success px-4" >Buy</span>
+                    </div>
+                </a>
+                <!-- END Startup Plan -->
+            </div>
+            <div class="col-md-6 col-xl-3 js-appear-enabled animated fadeInUp" data-toggle="appear" data-offset="50" data-timeout="400" data-class="animated fadeInUp">
+                <!-- Business Plan -->
+                <a class="block block-rounded block-link-shadow text-center " href="">
+                    <div class="block-header">
+                        <h3 class="block-title">
+                            Business
+                        </h3>
+                    </div>
+                    <div class="block-content bg-body-light">
+                        <div class="py-2">
+                            <p class="h1 font-w700 mb-2">$20</p>
+                            <p class="h6 text-muted">per month</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <div class="font-size-sm py-2">
+                            <p>
+                                <strong>40</strong> Categories
+                            </p>
+                            <p>
+                                <strong>200</strong> Bookmarks
+                            </p>
+                            <p>
+                                <strong>Yes</strong> Customer Support
+                            </p>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full bg-body-light">
+                        <span class="btn btn-success px-4">Buy</span>
+                    </div>
+                </a>
+                <!-- END Business Plan -->
+            </div>
+            <div class="col-md-6 col-xl-3 js-appear-enabled animated fadeInUp" data-toggle="appear" data-offset="50" data-timeout="600" data-class="animated fadeInUp">
+                <!-- VIP Plan -->
+                <a class="block block-rounded block-link-shadow text-center" href="">
+                    <div class="block-header">
+                        <h3 class="block-title">Unlimited</h3>
+                    </div>
+                    <div class="block-content bg-body-light">
+                        <div class="py-2">
+                            <p class="h1 font-w700 mb-2">$50</p>
+                            <p class="h6 text-muted">per month</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <div class="font-size-sm py-2">
+                            <p>
+                                <strong>Unlimited</strong> Categories
+                            </p>
+                            <p>
+                                <strong>Unlimited</strong> Bookmarks
+                            </p>
+                            <p>
+                                <strong>Yes</strong> Customer Support
+                            </p>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full bg-body-light">
+                        <span class="btn btn-success px-4">Contact Us</span>
+                    </div>
+                </a>
+                <!-- END VIP Plan -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

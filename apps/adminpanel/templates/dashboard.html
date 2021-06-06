@@ -1,0 +1,170 @@
+{% extends 'adminpanel/base.html'%}
+{% block content %}
+<!-- Hero -->
+<div class="bg-body-light">
+    <div class="content content-full">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+            <h1 class="flex-sm-fill h3 my-2">
+                Dashboard <small class="font-size-base font-w400 text-muted"></small>
+            </h1>
+            <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-alt">
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a class="link-fx" href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item">Dashboard</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- END Hero -->
+<!-- END Hero -->
+{% include 'website/alerts.html' %}
+<!-- Page Content -->
+<div class="content">
+    <div class="row row-deck">
+        <div class="col-sm-4 col-xl-4">
+
+            <div class="block block-rounded d-flex flex-column">
+                <div
+                    class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                        <dt class="font-size-h2 font-w700">{{ categories|length }}</dt>
+                        <dd class="text-muted mb-0">Categories</dd>
+                    </dl>
+                    <div class="item item-rounded bg-body">
+                        <i class="far fa-calendar font-size-h3 text-primary"></i>
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500 d-flex align-items-center" href="{% url 'categories' %}">
+                        View all Categories
+                        <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4 col-xl-4">
+
+            <div class="block block-rounded d-flex flex-column">
+                <div
+                    class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                        <dt class="font-size-h2 font-w700">{{ bookmarks|length }}</dt>
+                        <dd class="text-muted mb-0">Bookmarks</dd>
+                    </dl>
+                    <div class="item item-rounded bg-body">
+                        <i class="fa fa-calendar-check font-size-h3 text-primary"></i>
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500 d-flex align-items-center" href="{% url 'categories' %}">
+                        View Bookmarks
+                        <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4 col-xl-4">
+
+            <div class="block block-rounded d-flex flex-column">
+                <div
+                    class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                        <dt class="font-size-h2 font-w700">{{ request.user.userprofile.plan }}</dt>
+                        <dd class="text-muted mb-0">Plan</dd>
+                    </dl>
+                    <div class="item item-rounded bg-body">
+                        <i class="far fa-paper-plane font-size-h3 text-primary"></i>
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500 d-flex align-items-center" href="{% url 'upgrage-plans' %}">
+                        Upgrade Plan
+                        <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Overview -->
+
+    <!-- Recent Categories -->
+    <div class="block block-rounded">
+        <div class="block-content">
+            <div class="table-responsive">
+                <table class="table table-borderless table-striped table-vcenter">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 120px;">Index</th>
+                            <th class="d-none d-sm-table-cell">Title</th>
+                            <th class="d-none d-xl-table-cell">Bookmarks</th>
+                            <th class="d-none d-xl-table-cell">Description</th>
+                            <th class="d-none d-sm-table-cell">Modify</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+
+                        <tr>
+                            <td class="text-center font-size-sm"><strong>{{ forloop.counter }} </strong></td>
+                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">{{ category.title }}
+                            </td>
+                            <td class="d-none d-xl-table-cell font-size-sm">{{ category.bookmarks.all|length }}</td>
+                            <td class="d-none d-xl-table-cell font-size-sm">{{ category.description }}</td>
+
+                            <td class="">
+                                <a href="{% url 'category_edit' category.id %}"><i class="fa fa-fw fa-pencil-alt"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- END Categories Table -->
+
+    <!-- Recent Bookmark -->
+    <div class="block block-rounded">
+        <div class="block-header block-header-default">
+            <h3 class="block-title">Recent Bookmarks</h3>
+            <div class="block-options">
+            </div>
+        </div>
+        <div class="block-content">
+            <!-- Recent Orders Table -->
+            <div class="table-responsive">
+                <table class="table table-borderless table-striped table-vcenter">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 120px;">Index</th>
+                            <th class="d-none d-sm-table-cell">Title</th>
+                            <th class="d-none d-xl-table-cell">Total Bookmarks</th>
+                            <th class="d-none d-xl-table-cell">Urls</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bookmark in bookmarks %}
+                        <tr>
+                            <td class="text-center font-size-sm"><strong>{{ forloop.counter }}</strong></td>
+                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted">{{ bookmark.title }}
+                            </td>
+                            <td class="d-none d-xl-table-cell font-size-sm">{{ bookmark.description }}</td>
+                            <td class="d-none d-sm-table-cell font-size-sm font-w600 text-muted"><a
+                                    href="{{ bookmark.url }}" target="_blank">visit</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- END Recent Orders Table -->
+        </div>
+    </div>
+    <!-- END Bookmark Table -->
+</div>
+<!-- END Page Content -->
+{% endblock %}

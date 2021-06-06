@@ -1,0 +1,48 @@
+
+{% extends 'adminpanel/base.html'%}
+{% block content %}
+<div id="delete-bookmark">
+  <!-- Hero -->
+  <div class="bg-body-light">
+      <div class="content content-full">
+          <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+              <h1 class="flex-sm-fill h3 my-2">
+                 Bookmarks<small class="font-size-base font-w400 text-muted">
+              </h1>
+              <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                  <ol class="breadcrumb breadcrumb-alt">
+                      <li class="breadcrumb-item" aria-current="page">
+                          <a class="link-fx" href="{% url 'dashboard' %}">Dashboard</a>
+                      </li>
+                       <li class="breadcrumb-item" aria-current="page">
+                          <a class="link-fx" href="{% url 'categories' %}">Category</a>
+                      </li>
+                      <li class="breadcrumb-item"> {{ category.title }}</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+  <!-- END Hero -->
+  {% include 'website/alerts.html' %}
+  <div class="content">
+    <div class="row row-deck">
+    {% for bookmark in bookmarks %}
+      <div class="col-sm-6 col-md-4 col-l-3 col-xl-3">
+        <div class="block block-rounded d-flex flex-column">
+            <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                <dl class="mb-0">
+                    <dt class="font-size-h2 font-w700">{{ bookmark.title }}</dt>
+                    <dd class="text-muted mb-0">{{ bookmark.description }}</dd>
+                </dl>
+                <div class="item item-rounded bg-body"><a href="{{ bookmark.url }}" class="card-footer-item" target="_blank">
+                    <i class="fa fa-eye font-size-h3 text-success"></i></a>
+                </div>
+            </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
