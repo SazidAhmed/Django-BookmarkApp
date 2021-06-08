@@ -7,10 +7,7 @@
       <div class="content content-full">
           <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
               <h1 class="flex-sm-fill h3 my-2">
-                 {{ category.title }}<small class="font-size-base font-w400 text-muted">
-                
-                <a href="{% url 'bookmark_add' category.id %}" class="badge badge-pill badge-success"><i class="fa fa-fw fa-plus-circle"></i> New</a>
-                 </small>
+                 Category : {{ category.title }}<small class="font-size-base font-w400 text-muted"></small>
                  
               </h1>
               <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
@@ -30,8 +27,9 @@
   <!-- END Hero -->
   {% include 'website/alerts.html' %}
   <div class="content">
+    <a href="{% url 'bookmark_add' category.id %}" class="btn btn-block btn-success mb-4">Add New Bookmark</a>
     <div class="row row-deck">
-      <div class="col-sm-6 col-md-4 col-l-3 col-xl-3" v-for="bookmark in bookmarks" v-bind:key="bookmark.id">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" v-for="bookmark in bookmarks" v-bind:key="bookmark.id">
           <!-- Pending Orders -->
           <div class="block block-rounded d-flex flex-column">
               <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
@@ -45,14 +43,18 @@
                   </div>
               </div>
               <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
-                  <a class="font-w500 align-items-center text-primary btn btn-link" :href="bookmark.editurl">
-                      Edit
-                      <i class="fa fa-edit ml-1 opacity-50 font-size-base text-primary"></i>
-                  </a>
-                    <a class="font-w500 align-items-center text-danger btn btn-link "  @click="toggleDialog(bookmark.id)">
-                      Delete
-                      <i class="fa fa-trash-alt ml-1 opacity-50 font-size-base text-danger"></i>
-                  </a>
+                <!-- <a class="font-w500 align-items-center text-success btn btn-link" :href="bookmark.url"  @click="increaseVisits(bookmark.id)" target="_blank">
+                    Open
+                    <i class="fa fa-eye ml-1 opacity-50 font-size-base text-success"></i>
+                </a> -->
+                <a class="font-w500 align-items-center text-primary btn btn-link" :href="bookmark.editurl">
+                    Edit
+                    <i class="fa fa-edit ml-1 opacity-50 font-size-base text-primary"></i>
+                </a>
+                <a class="font-w500 align-items-center text-danger btn btn-link "  @click="toggleDialog(bookmark.id)">
+                    Delete
+                    <i class="fa fa-trash-alt ml-1 opacity-50 font-size-base text-danger"></i>
+                </a>
               </div>
           </div>
           <!-- END Pending Orders -->

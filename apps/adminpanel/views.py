@@ -11,9 +11,11 @@ from apps.userprofile.models import Userprofile
 
 @login_required
 def dashboard(request):
+  myCategories = request.user.categories.all()
+  myBookmarks = request.user.bookmarks.all()
   categories = request.user.categories.all().order_by('-created_at')[0:5]
   bookmarks = request.user.bookmarks.all().order_by('-created_at')[0:5]
-  context={'bookmarks':bookmarks, 'categories':categories}
+  context={'bookmarks':bookmarks, 'categories':categories, 'myBookmarks':myBookmarks, 'myCategories':myCategories}
   return render(request, 'dashboard.html', context)
 
 @login_required

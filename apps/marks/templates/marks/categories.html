@@ -7,9 +7,7 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Category List<small class="font-size-base font-w400 text-muted">
-                    <a href="{% url 'category_add' %}" class="badge badge-pill badge-success"><i class="fa fa-fw fa-plus-circle"></i> New</a>
-                    </small>
+                    Category List<small class="font-size-base font-w400 text-muted"></small>
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
@@ -24,9 +22,10 @@
     </div>
     <!-- END Hero -->
     <div class="content">
+        <a href="{% url 'category_add' %}" class="btn btn-block btn-success mb-4">Add New Category</a>
         <div class="row row-deck">
         {% for category in categories %}
-        <div class="col-sm-6 col-md-4 col-l-3 col-xl-3">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
             <!-- Pending Orders -->
             <div class="block block-rounded d-flex flex-column">
                 <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">

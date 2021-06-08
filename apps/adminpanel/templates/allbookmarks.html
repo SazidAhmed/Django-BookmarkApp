@@ -15,9 +15,9 @@
                           <a class="link-fx" href="{% url 'dashboard' %}">Dashboard</a>
                       </li>
                        <li class="breadcrumb-item" aria-current="page">
-                          <a class="link-fx" href="{% url 'categories' %}">Category</a>
+                          <a class="link-fx" href="{% url 'categories' %}">Categories</a>
                       </li>
-                      <li class="breadcrumb-item"> {{ category.title }}</li>
+                      <li class="breadcrumb-item">Bookmarks</li>
                   </ol>
               </nav>
           </div>
@@ -28,7 +28,7 @@
   <div class="content">
     <div class="row row-deck">
     {% for bookmark in bookmarks %}
-      <div class="col-sm-6 col-md-4 col-l-3 col-xl-3">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
         <div class="block block-rounded d-flex flex-column">
             <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                 <dl class="mb-0">
